@@ -16,8 +16,6 @@ This is a final year project made by Anirudra Adhikary, Akash Mukherjee, Masuma 
 - [x] Simple User Interface
 - [x] Comprehensive Commenting
 
-## Live Sign Translator on https://bit.ly/2CwPvgP
-
 ## To Run locally 
 Open `index.html` in Chrome.<br/>
 *NOTE:* This will disable video call functionality.
