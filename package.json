@@ -7,11 +7,11 @@
     "deeplearn-knn-image-classifier": "^0.3.0",
     "express": "^4.19.2",
     "pre-commit": "^1.2.2"
-  },
+  } /*,
   "scripts": {
-    "start": "budo main.js:dist/build.js --live --host localhost",
-    "build": "browserify main.js -o dist/build.js"
-  },
+    "start": "budo main.js:public/dist/build.js --live --host localhost",
+    "build": "browserify main.js -o public/dist/build.js"
+  } */,
   "pre-commit": [
     "build"
   ],
