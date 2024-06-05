@@ -11,9 +11,6 @@
   "scripts": {
     "start": "budo main.js:public/dist/build.js --live --host localhost",
   },
-  "pre-commit": [
-    "build"
-  ],
   "browserify": {
     "transform": [
       [
