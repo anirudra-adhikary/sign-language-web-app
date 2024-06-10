@@ -13,10 +13,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      The kNN Classifier used for this project was created by Google TensorFlow. 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      The kNN classifier requires the computation of random numbers that is not readily available on JavaScript.
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      To accomplish this, the work of Johannes Baagøe on "implementations of Randomness in Javascript" was used.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     Additionally, usage of TensorFlow was learned from Abishek Singh's "alexa-sign-language-translator".
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     Author: Sufiyaan Nadeem
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     Additionally, usage of TensorFlow was learned from Abishek Singh's "alexa-sign-language-translator". Author: Anirudra   Adhikary                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           */
 
 // Importing the k-Nearest Neighbors Algorithm
 
@@ -94,6 +91,7 @@ var Main = function () {
     this.predButton = document.getElementById("predictButton");
     this.backToTrainButton = document.getElementById("backButton");
     this.nextButton = document.getElementById('nextButton');
+    this.snextButton = document.getElementById('snextButton');    
 
     this.statusContainer = document.getElementById("status");
     this.statusText = document.getElementById("status-text");
@@ -196,6 +194,31 @@ var Main = function () {
           _this3.setupTrainingUI();
         }
       });
+
+      this.snextButton.addEventListener('click', function () {
+        var exampleCount = _this3.knn.getClassExampleCount();
+        if (Math.max.apply(Math, _toConsumableArray(exampleCount)) > 0) {
+          // if start gesture has not been trained
+          if (exampleCount[0] == 0) {
+            alert('You haven\'t added examples for the Start Gesture');
+            return;
+          }
+
+          // if stop gesture has not been trained
+          if (exampleCount[1] == 0) {
+            alert('You haven\'t added examples for the Stop Gesture.\n\nCapture yourself in idle states e.g hands by your side, empty background etc.');
+            return;
+          }
+
+          _this3.snextButton.style.display = "none";
+          _this3.stageTitle.innerText = "Continue Training";
+          _this3.stageInstruction.innerText = "Add Gesture Name and Train.";
+
+          //Start custom gesture training process
+          _this3.setupTrainingUI();
+        }
+      });
+
 
       //Create initial training buttons
       this.initialGestures(0, "startButton");
@@ -518,7 +541,13 @@ var Main = function () {
           _this8.videoCall.style.display = "none"; // turn off video call in case it's on
           _this8.videoCallBtn.style.display = "block";
 
-          _this8.backToTrainButton.style.display = "block";
+          if (window.innerWidth > 768) {
+            _this8.backToTrainButton.style.display = "block";
+            _this8.videoCallBtn.style.display = "block";
+          } else {
+            _this8.backToTrainButton.style.display = "none";
+            _this8.videoCallBtn.style.display = "none";
+          }
 
           // Change style of video display
           _this8.video.className = "videoPredict";
@@ -546,6 +575,7 @@ var Main = function () {
           alert('You haven\'t added any examples yet.\n\nPress and hold on the "Add Example" button next to each word while performing the sign in front of the webcam.');
         }
       });
+
     }
 
     /*This function stops the training process and allows user's to copy text on the click of
@@ -21735,3 +21765,6 @@ if ((typeof module) == 'object' && module.exports) {
 
 }).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}]},{},[1]);
+
+
+
