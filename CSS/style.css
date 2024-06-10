@@ -645,14 +645,14 @@ label {
     justify-content: center;
     /* align-items: center; */
     /* flex-wrap: wrap; */
-    margin-top: 350px;
-    /* top: 65%; */
+    margin-top: 600px;
+    top: 65%;
     position: relative;
     /* width: 100%; */
   }
 
   .trained-gestures {
-    /* float: center; */
+    float: center;
     width: 215px;
     height: 200px;
     margin: 17px;
