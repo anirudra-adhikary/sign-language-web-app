@@ -13,7 +13,10 @@ var _createClass = function () { function defineProperties(target, props) { for 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      The kNN Classifier used for this project was created by Google TensorFlow. 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      The kNN classifier requires the computation of random numbers that is not readily available on JavaScript.
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      To accomplish this, the work of Johannes Baagøe on "implementations of Randomness in Javascript" was used.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     Additionally, usage of TensorFlow was learned from Abishek Singh's "alexa-sign-language-translator". Author: Anirudra   Adhikary                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     Additionally, usage of TensorFlow was learned from Abishek Singh's "alexa-sign-language-translator".
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     Author: Anirudra Adhikary
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     */
 
 // Importing the k-Nearest Neighbors Algorithm
 
@@ -91,7 +94,7 @@ var Main = function () {
     this.predButton = document.getElementById("predictButton");
     this.backToTrainButton = document.getElementById("backButton");
     this.nextButton = document.getElementById('nextButton');
-    this.snextButton = document.getElementById('snextButton');    
+    this.snextButton = document.getElementById("snextButton");
 
     this.statusContainer = document.getElementById("status");
     this.statusText = document.getElementById("status-text");
@@ -186,6 +189,7 @@ var Main = function () {
             return;
           }
 
+          console.log('hello world');
           _this3.nextButton.style.display = "none";
           _this3.stageTitle.innerText = "Continue Training";
           _this3.stageInstruction.innerText = "Add Gesture Name and Train.";
@@ -210,6 +214,7 @@ var Main = function () {
             return;
           }
 
+          console.log('hello world');
           _this3.snextButton.style.display = "none";
           _this3.stageTitle.innerText = "Continue Training";
           _this3.stageInstruction.innerText = "Add Gesture Name and Train.";
@@ -218,7 +223,6 @@ var Main = function () {
           _this3.setupTrainingUI();
         }
       });
-
 
       //Create initial training buttons
       this.initialGestures(0, "startButton");
@@ -564,7 +568,45 @@ var Main = function () {
           // Remove training UI
           _this8.trainingContainer.style.display = "none";
           _this8.trainedCardsHolder.style.marginTop = "130px";
+          _this8.spredButton.addEventListener('click', function () {
+            // Change the styling of video display and start prediction
+            console.log("go to translate");
+            var exampleCount = _this8.knn.getClassExampleCount();
+            // check if training is complete
+            if (Math.max.apply(Math, _toConsumableArray(exampleCount)) > 0) {
+              _this8.video.style.display = "inline-block"; // turn on video from webscam in case it's off
 
+              _this8.videoCall.style.display = "none"; // turn off video call in case it's on
+              _this8.videoCallBtn.style.display = "block";
+
+              _this8.backToTrainButton.style.display = "block";
+
+              // Change style of video display
+              _this8.video.className = "videoPredict";
+              _this8.videoContainer.style.display = "inline-block";
+              _this8.videoContainer.style.width = "";
+              _this8.videoContainer.style.height = "";
+              _this8.videoContainer.className = "videoContainerPredict";
+              _this8.videoContainer.style.border = "8px solid black";
+
+              // Update stage and instruction info
+              _this8.stageTitle.innerText = "Translate";
+              _this8.stageInstruction.innerText = "Start Translating with your Start Gesture.";
+
+              // Remove training UI
+              _this8.trainingContainer.style.display = "none";
+              _this8.trainedCardsHolder.style.marginTop = "130px";
+
+              // Display translation holder that contains translated text
+              _this8.translationHolder.style.display = "block";
+
+              _this8.spredButton.style.display = "none";
+              // Start Translation
+              _this8.setUpTranslation();
+            } else {
+              alert('You haven\'t added any examples yet.\n\nPress and hold on the "Add Example" button next to each word while performing the sign in front of the webcam.');
+            }
+          });
           // Display translation holder that contains translated text
           _this8.translationHolder.style.display = "block";
 
@@ -575,7 +617,6 @@ var Main = function () {
           alert('You haven\'t added any examples yet.\n\nPress and hold on the "Add Example" button next to each word while performing the sign in front of the webcam.');
         }
       });
-
     }
 
     /*This function stops the training process and allows user's to copy text on the click of
@@ -21765,6 +21806,3 @@ if ((typeof module) == 'object' && module.exports) {
 
 }).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}]},{},[1]);
-
-
-
