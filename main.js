@@ -12,7 +12,7 @@ The kNN classifier requires the computation of random numbers that is not readil
 To accomplish this, the work of Johannes Baagøe on "implementations of Randomness in Javascript" was used.
 Additionally, usage of TensorFlow was learned from Abishek Singh's "alexa-sign-language-translator".
 
-Author: Anirudra Adhikary
+Author: Sufiyaan Nadeem
 */
 
 // Importing the k-Nearest Neighbors Algorithm
@@ -77,7 +77,7 @@ class Main {
     this.predButton = document.getElementById("predictButton");
     this.backToTrainButton = document.getElementById("backButton");
     this.nextButton = document.getElementById('nextButton');
-    this.snextButton = document.getElementById("snextButton");
+    this.snextButton = document.getElementById('snextButton');
 
     this.statusContainer = document.getElementById("status");
     this.statusText = document.getElementById("status-text");
@@ -155,7 +155,6 @@ class Main {
           return;
         }
 
-        console.log('hello world')
         this.nextButton.style.display = "none";
         this.stageTitle.innerText = "Continue Training";
         this.stageInstruction.innerText = "Add Gesture Name and Train.";
@@ -180,7 +179,6 @@ class Main {
           return;
         }
 
-        console.log('hello world')
         this.snextButton.style.display = "none";
         this.stageTitle.innerText = "Continue Training";
         this.stageInstruction.innerText = "Add Gesture Name and Train.";
@@ -474,16 +472,14 @@ class Main {
         this.video.style.display = "inline-block"; // turn on video from webscam in case it's off
 
         this.videoCall.style.display = "none"; // turn off video call in case it's on
-        this.videoCallBtn.style.display = "block";
-
 
         if (window.innerWidth > 768) {
-          this.backToTrainButton.style.display = "block";
           this.videoCallBtn.style.display = "block";
+          this.backToTrainButton.style.display = "block";
         } else {
-          this.backToTrainButton.style.display = "none";
           this.videoCallBtn.style.display = "none";
-        }
+          this.backToTrainButton.style.display = "none";
+      }
 
         // Change style of video display
         this.video.className = "videoPredict";
@@ -501,46 +497,7 @@ class Main {
         // Remove training UI
         this.trainingContainer.style.display = "none";
         this.trainedCardsHolder.style.marginTop = "130px";
-        this.spredButton.addEventListener('click', () => {
-          // Change the styling of video display and start prediction
-          console.log("go to translate");
-          const exampleCount = this.knn.getClassExampleCount();
-          // check if training is complete
-          if (Math.max(...exampleCount) > 0) {
-            this.video.style.display = "inline-block"; // turn on video from webscam in case it's off
-    
-            this.videoCall.style.display = "none"; // turn off video call in case it's on
-            this.videoCallBtn.style.display = "block";
-    
-            this.backToTrainButton.style.display = "block";
-    
-            // Change style of video display
-            this.video.className = "videoPredict";
-            this.videoContainer.style.display = "inline-block";
-            this.videoContainer.style.width = "";
-            this.videoContainer.style.height = "";
-            this.videoContainer.className = "videoContainerPredict";
-            this.videoContainer.style.border = "8px solid black";
-    
-    
-            // Update stage and instruction info
-            this.stageTitle.innerText = "Translate";
-            this.stageInstruction.innerText = "Start Translating with your Start Gesture.";
-    
-            // Remove training UI
-            this.trainingContainer.style.display = "none";
-            this.trainedCardsHolder.style.marginTop = "130px";
-    
-            // Display translation holder that contains translated text
-            this.translationHolder.style.display = "block";
-    
-            this.spredButton.style.display = "none";
-            // Start Translation
-            this.setUpTranslation();
-          } else {
-            alert('You haven\'t added any examples yet.\n\nPress and hold on the "Add Example" button next to each word while performing the sign in front of the webcam.');
-          }
-        })
+
         // Display translation holder that contains translated text
         this.translationHolder.style.display = "block";
 
@@ -551,7 +508,6 @@ class Main {
         alert('You haven\'t added any examples yet.\n\nPress and hold on the "Add Example" button next to each word while performing the sign in front of the webcam.');
       }
     })
-
   }
 
   /*This function stops the training process and allows user's to copy text on the click of
